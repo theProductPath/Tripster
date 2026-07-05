@@ -1,0 +1,101 @@
+{
+  "_meta": {
+    "name": "Your Name",
+    "version": "1.0",
+    "last_updated": "2026-01-01",
+    "sources": [
+      "Add where your preference data came from"
+    ],
+    "notes": "Copy this file to <your-name>.json and fill in your preferences. Delete any sections that don't apply. The more detail you provide, the better the agents can calibrate to your taste."
+  },
+
+  "identity": {
+    "travel_style": "How you like to explore cities (e.g., 'structured sightseeing', 'flâneur-style wandering', 'activity-focused adventure')",
+    "shopping_mode": "How you shop (e.g., 'targeted buyer', 'casual browser', 'treasure hunter')",
+    "aesthetic": "What visual/atmospheric qualities you're drawn to",
+    "price_positioning": "Your general spending tier (e.g., 'budget-conscious', 'moderate', 'premium craft', 'luxury')",
+    "cultural_sensibility": [
+      "Cultural interests and influences that shape your taste"
+    ],
+    "values": [
+      "What matters to you when choosing places"
+    ]
+  },
+
+  "coffee": {
+    "tags": ["independent"],
+    "notes": "Describe what you look for in a coffee shop — the vibe, the coffee style, the experience.",
+    "positive_signals": [
+      "Qualities that make a coffee shop appealing to you"
+    ],
+    "negative_signals": [
+      "Qualities that make a coffee shop unappealing"
+    ],
+    "reference_places": [
+      {"name": "A coffee shop you love", "city": "City", "why": "What makes it special to you"}
+    ]
+  },
+
+  "shopping": {
+    "tags": [],
+    "notes": "Describe what you look for when shopping — types of stores, what you buy, how you browse.",
+    "positive_signals": [],
+    "negative_signals": [],
+    "reference_places": [
+      {"name": "A shop you love", "city": "City", "why": "What makes it special to you"}
+    ]
+  },
+
+  "food": {
+    "cuisine_ranked": [
+      "Your favorite cuisines in order"
+    ],
+    "dining_style": "How you like to eat out — casual, fine dining, street food, etc.",
+    "budget": "moderate",
+    "reservation_tolerance": "easy-only",
+    "positive_signals": [],
+    "negative_signals": [],
+    "dietary_notes": "Any dietary restrictions or preferences",
+    "drinks": {
+      "cocktails": [],
+      "notes": ""
+    },
+    "reference_places": [
+      {"name": "A restaurant you love", "city": "City", "why": "What makes it special to you"}
+    ]
+  },
+
+  "books": {
+    "tags": [],
+    "notes": "What you look for in bookstores.",
+    "positive_signals": [],
+    "negative_signals": []
+  },
+
+  "travel": {
+    "interests": [
+      "Types of attractions and experiences you enjoy"
+    ],
+    "avoid": [
+      "Types of attractions you'd rather skip"
+    ],
+    "preferred_neighborhoods": {
+      "description": "What kind of neighborhoods you gravitate toward",
+      "pattern": "How to identify your kind of neighborhood in a new city"
+    },
+    "pace_default": "medium",
+    "outdoors": {
+      "notes": "Your outdoor activity preferences"
+    }
+  },
+
+  "context_signals": {
+    "description": "Cross-category heuristics — qualities that make any venue more or less appealing regardless of category",
+    "strong_positive": [
+      "Universal qualities you love in any venue"
+    ],
+    "strong_negative": [
+      "Universal dealbreakers"
+    ]
+  }
+}

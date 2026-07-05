@@ -1,0 +1,17 @@
+# Personal preference profiles — keep your own local; only the template is committed
+preferences/*.json
+!preferences/_template.json
+
+# Generated trip runs (personal itineraries + per-agent research, may contain Notion links)
+runs/
+
+# Local notes / assessments
+/Application Assessment - Tripster.md
+
+# Claude local settings
+.claude/settings.local.json
+
+# OS / editor / filesystem cruft
+.DS_Store
+**/.DS_Store
+**/.fuse_hidden*

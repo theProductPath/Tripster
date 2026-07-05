@@ -1,0 +1,212 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Context Packet",
+  "description": "The single structured object passed to every specialist agent. Contains trip details, user profile, preferences, and constraints.",
+  "type": "object",
+  "required": ["trip", "preferences"],
+  "properties": {
+    "user_profile": {
+      "type": "string",
+      "description": "Name of the preference file to load from preferences/ directory (without .json extension). e.g. 'jane' loads preferences/jane.json. The full profile is injected into the context packet at runtime."
+    },
+    "trip": {
+      "type": "object",
+      "required": ["city", "dates", "num_days", "pace"],
+      "properties": {
+        "city": {
+          "type": "string",
+          "description": "City and state/country, e.g. 'Portland, OR'"
+        },
+        "dates": {
+          "type": "object",
+          "required": ["start", "end"],
+          "properties": {
+            "start": { "type": "string", "format": "date" },
+            "end": { "type": "string", "format": "date" }
+          }
+        },
+        "num_days": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "pace": {
+          "type": "string",
+          "enum": ["light", "medium", "maximal"],
+          "description": "How packed the days should be"
+        },
+        "accommodation": {
+          "type": "object",
+          "properties": {
+            "address": { "type": "string" },
+            "neighborhood": { "type": "string" },
+            "lat": { "type": "number" },
+            "lng": { "type": "number" }
+          }
+        }
+      }
+    },
+    "preferences": {
+      "type": "object",
+      "properties": {
+        "coffee": {
+          "type": "object",
+          "properties": {
+            "tags": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "e.g. ['independent', 'espresso-focused', 'good-seating', 'walkable']"
+            },
+            "notes": { "type": "string" },
+            "positive_signals": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "What to look for — qualities that indicate a strong match"
+            },
+            "negative_signals": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "What to avoid — qualities that indicate a poor match"
+            },
+            "reference_places": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "city": { "type": "string" },
+                  "why": { "type": "string" }
+                }
+              },
+              "description": "Known-good examples of places the user loves. Use these as calibration for what to find."
+            }
+          }
+        },
+        "shopping": {
+          "type": "object",
+          "properties": {
+            "tags": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "e.g. ['thrift', 'menswear', 'vintage', 'design']"
+            },
+            "notes": { "type": "string" },
+            "positive_signals": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "negative_signals": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "reference_places": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "city": { "type": "string" },
+                  "why": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "books": {
+          "type": "object",
+          "properties": {
+            "tags": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "e.g. ['used', 'rare', 'indie']"
+            },
+            "notes": { "type": "string" },
+            "positive_signals": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "negative_signals": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        },
+        "food": {
+          "type": "object",
+          "properties": {
+            "cuisine_ranked": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Cuisines in order of preference"
+            },
+            "likes": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "dislikes": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "budget": {
+              "type": "string",
+              "enum": ["budget", "moderate", "splurge", "mixed"]
+            },
+            "reservation_tolerance": {
+              "type": "string",
+              "enum": ["none", "easy-only", "will-plan-ahead"]
+            },
+            "dietary_notes": { "type": "string" },
+            "positive_signals": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "negative_signals": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        },
+        "context_signals": {
+          "type": "object",
+          "description": "Cross-category heuristics for venue evaluation",
+          "properties": {
+            "strong_positive": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "strong_negative": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "constraints": {
+      "type": "object",
+      "properties": {
+        "budget": {
+          "type": "string",
+          "description": "Overall budget level or daily budget"
+        },
+        "must_dos": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Non-negotiable activities or places"
+        },
+        "avoid": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Things to avoid"
+        },
+        "mobility": {
+          "type": "string",
+          "description": "Any mobility constraints"
+        },
+        "weather_notes": {
+          "type": "string",
+          "description": "Known weather conditions for the trip dates"
+        }
+      }
+    }
+  }
+}

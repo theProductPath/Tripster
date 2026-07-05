@@ -1,0 +1,156 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Itinerary",
+  "description": "The final day-by-day itinerary produced by the coordinator.",
+  "type": "object",
+  "required": ["city", "num_days", "days"],
+  "properties": {
+    "city": { "type": "string" },
+    "num_days": { "type": "integer" },
+    "dates": {
+      "type": "object",
+      "properties": {
+        "start": { "type": "string", "format": "date" },
+        "end": { "type": "string", "format": "date" }
+      }
+    },
+    "pace": {
+      "type": "string",
+      "enum": ["light", "medium", "maximal"]
+    },
+    "days": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["day", "neighborhoods", "blocks"],
+        "properties": {
+          "day": { "type": "integer" },
+          "date": { "type": "string", "format": "date" },
+          "neighborhoods": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Neighborhoods visited this day"
+          },
+          "theme": {
+            "type": "string",
+            "description": "Short theme for the day, e.g. 'Coffee + Vintage in SE Portland'"
+          },
+          "blocks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["time", "activity", "venue"],
+              "properties": {
+                "time": {
+                  "type": "string",
+                  "description": "Suggested start time, e.g. '9:00am'"
+                },
+                "activity": {
+                  "type": "string",
+                  "description": "Category: coffee, restaurant, vintage, menswear, bookstore, lifestyle, market, park, explore, transit, flexible"
+                },
+                "venue": { "type": "string" },
+                "address": { "type": "string" },
+                "neighborhood": { "type": "string" },
+                "duration_min": { "type": "integer" },
+                "notes": { "type": "string" },
+                "walk_from_previous": {
+                  "type": "string",
+                  "description": "Walk time from previous block, e.g. '12 min'"
+                },
+                "website_url": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "Venue's official website URL (from agent source_url)"
+                },
+                "google_maps_url": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "Google Maps search URL for the venue"
+                }
+              }
+            }
+          },
+          "alternates": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "venue": { "type": "string" },
+                "swaps_for": { "type": "string" },
+                "reason": { "type": "string" }
+              }
+            },
+            "description": "Backup venues that can substitute for scheduled ones"
+          },
+          "transit_directions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "from_neighborhood": { "type": "string" },
+                "to_neighborhood": { "type": "string" },
+                "from_venue": { "type": "string" },
+                "to_venue": { "type": "string" },
+                "google_maps_directions_url": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "Google Maps directions URL between clusters"
+                },
+                "method": {
+                  "type": "string",
+                  "description": "e.g. 'G train + walk', 'bus B62', '25 min walk'"
+                },
+                "estimated_time": {
+                  "type": "string",
+                  "description": "e.g. '25 min'"
+                }
+              }
+            },
+            "description": "Directions between neighborhood clusters within this day"
+          },
+          "also_consider": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["neighborhood", "venues"],
+              "properties": {
+                "neighborhood": { "type": "string" },
+                "venues": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "type": "string" },
+                      "category": { "type": "string" },
+                      "address": { "type": "string" },
+                      "match_score": { "type": "number" },
+                      "reason": {
+                        "type": "string",
+                        "description": "What it offers or what it could swap for"
+                      },
+                      "website_url": { "type": "string", "format": "uri" },
+                      "google_maps_url": { "type": "string", "format": "uri" },
+                      "walk_from_nearest_planned": {
+                        "type": "string",
+                        "description": "Walking time from the nearest planned venue, e.g. '5 min from Bakeri'"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Backup venues per neighborhood if you have extra time or want to swap"
+          }
+        }
+      }
+    },
+    "neighborhood_notes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "General notes about each neighborhood visited"
+    }
+  }
+}
